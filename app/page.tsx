@@ -1628,7 +1628,9 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="border-t border-sky-200 bg-sky-100/90 py-6 text-center text-xs text-sky-900 font-semibold mt-16">
-        <p>MOVIX Studio v 1.0</p>
+        <p>
+          MOVIX Studio <span className="text-[14px]">v 2.0</span>
+        </p>
       </footer>
     </div>
   );

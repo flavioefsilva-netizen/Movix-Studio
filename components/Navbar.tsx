@@ -22,7 +22,7 @@ export function Navbar({ activeStep }: NavbarProps) {
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xl font-black tracking-tight text-sky-950">
-                MOVIX Studio <span className="text-sm font-bold text-sky-700">v 1.0</span>
+                MOVIX Studio <span className="text-[14px] font-bold text-sky-700">v 2.0</span>
               </span>
             </div>
           </div>
