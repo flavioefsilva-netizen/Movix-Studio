@@ -1,0 +1,6 @@
+{
+  "name": "MOVIX SlideVideo - PowerPoint & Vídeo com Narração",
+  "description": "Crie apresentações em PowerPoint (.pptx) com textos e fotos anexadas, valide e transforme em vídeos com narração automática e download.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
