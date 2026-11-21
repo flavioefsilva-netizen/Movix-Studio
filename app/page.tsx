@@ -19,6 +19,7 @@ import {
   Clock,
   ArrowRight,
   Check,
+  RefreshCw,
 } from "lucide-react";
 
 import { Navbar } from "@/components/Navbar";
@@ -26,6 +27,7 @@ import { SlideCard } from "@/components/SlideCard";
 import { ValidationBanner } from "@/components/ValidationBanner";
 import { VideoPlayerCard } from "@/components/VideoPlayerCard";
 import { PhotosVideoEnvironment } from "@/components/PhotosVideoEnvironment";
+import { VideoConverterEnvironment } from "@/components/VideoConverterEnvironment";
 import { VoiceAndTransitionSettings } from "@/components/VoiceAndTransitionSettings";
 import { VoiceSlotsSelector } from "@/components/VoiceSlotsSelector";
 import { StepHeader, StepNavigationFooter } from "@/components/StepHeader";
@@ -103,9 +105,9 @@ function generateLocalPresentationFromParsed(
 }
 
 export default function HomePage() {
-  // Binary Mode Selector: "Criar Video sobre Fotos e Textos" ou "Criar Video Sobre Textos e Apresentação"
+  // Mode Selector: "Criar Video sobre Fotos e Textos", "Criar Video Sobre Textos e Apresentação", ou "Converter Videos"
   // Starts with NO function selected initially (appMode === null) as requested
-  const [appMode, setAppMode] = useState<"photos-text" | "text-presentation" | null>(null);
+  const [appMode, setAppMode] = useState<"photos-text" | "text-presentation" | "video-converter" | null>(null);
 
   // Step-by-step Quadro a Quadro navigation for Presentation Mode (1 to 8)
   const [presentationStep, setPresentationStep] = useState<number>(1);
@@ -815,7 +817,7 @@ export default function HomePage() {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Opção 1: Criar Video sobre Fotos e Textos */}
               <button
                 type="button"
@@ -866,8 +868,44 @@ export default function HomePage() {
                   </p>
                 </div>
               </button>
+
+              {/* Opção 3: Converter Videos */}
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveEditingProject(null);
+                  setAppMode("video-converter");
+                }}
+                className="relative flex items-center gap-4 p-5 rounded-2xl border-2 transition-all cursor-pointer text-left bg-gradient-to-b from-white to-sky-50/70 border-sky-300 hover:border-sky-500 hover:bg-sky-100/60 shadow-lg shadow-sky-900/5 hover:scale-[1.01]"
+              >
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border bg-sky-600 text-white border-sky-500 font-bold shadow-md">
+                  <RefreshCw className="w-6 h-6" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="text-sm sm:text-base font-black text-sky-950">
+                      Converter Videos
+                    </h3>
+                  </div>
+                  <p className="text-xs mt-1 leading-relaxed text-sky-800">
+                    Converta vídeos entre extensões (MP4, WebM, MOV, AVI, MKV, GIF) ou extraia áudio em MP3/WAV com opções de resolução, corte e acesso ao WebM Studio.
+                  </p>
+                </div>
+              </button>
             </div>
           </section>
+        )}
+
+        {/* ========================================================================= */}
+        {/* AMBIENTE 3: CONVERTER VIDEOS (Integrado + link opcional WebM Studio)      */}
+        {/* ========================================================================= */}
+        {appMode === "video-converter" && (
+          <VideoConverterEnvironment
+            onBackToModeSelection={() => {
+              setActiveEditingProject(null);
+              setAppMode(null);
+            }}
+          />
         )}
 
         {/* ========================================================================= */}
